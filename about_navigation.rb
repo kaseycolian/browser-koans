@@ -33,7 +33,7 @@ class AboutNavigation < Edgecase::Koan
     selenium do |driver|
       driver.get GOOGLE
       driver.navigate.refresh
-      assert_equal __, driver.current_url
+      assert_equal "https://www.google.com/", driver.current_url
     end
   end
 
@@ -41,7 +41,7 @@ class AboutNavigation < Edgecase::Koan
     selenium do |driver|
       driver.get GOOGLE
       driver.get MICROSOFT
-      assert_equal __, driver.current_url
+      assert_equal "https://www.microsoft.com/en-us/", driver.current_url
     end
   end
 
@@ -50,7 +50,7 @@ class AboutNavigation < Edgecase::Koan
       driver.get GOOGLE
       driver.get MICROSOFT
       driver.navigate.back
-      assert_equal __, driver.current_url
+      assert_equal "https://www.google.com/", driver.current_url
     end
   end
 
@@ -60,7 +60,7 @@ class AboutNavigation < Edgecase::Koan
       driver.get MICROSOFT
       driver.navigate.back
       driver.navigate.forward
-      assert_equal __, driver.current_url
+      assert_equal "https://www.microsoft.com/en-us/", driver.current_url
     end
   end
 end
