@@ -15,18 +15,18 @@ class AboutFindingPageElements < Edgecase::Koan
         element_found = true
       end
     end
-    assert_equal __, element_found
+    assert_equal true, element_found
   end
 
   def test_trying_to_find_something_that_is_not_on_the_page
     element_found = false
     on_browserkoans_test_page do |driver|
-      assert_raise(__) do
+      assert_raise(Selenium::WebDriver::Error::NoSuchElementError) do
         the_element = driver.find_element(id: 'this-is-not-present')
         element_found = true
       end
     end
-    assert_equal __, element_found
+    assert_equal false, element_found
   end
 
   def test_find_elements_via_hash_syntax
@@ -37,7 +37,7 @@ class AboutFindingPageElements < Edgecase::Koan
         element_found = true
       end
     end
-    assert_equal __, element_found
+    assert_equal true, element_found
   end
 
   def test_find_multiple_elements_by_class
@@ -45,7 +45,7 @@ class AboutFindingPageElements < Edgecase::Koan
     on_browserkoans_test_page do |driver|
       the_elements = driver.find_elements(class: 'myclass')
     end
-    assert_equal __, the_elements.size
+    assert_equal 2, the_elements.size
   end
 
 
@@ -54,7 +54,7 @@ class AboutFindingPageElements < Edgecase::Koan
     on_browserkoans_test_page do |driver|
       the_elements = driver.find_elements(tag_name: 'p')
     end
-    assert_equal __, the_elements.size
+    assert_equal 11, the_elements.size
   end
 
   LINK_SELECTOR = ".p-with-link a"
@@ -64,6 +64,6 @@ class AboutFindingPageElements < Edgecase::Koan
     on_browserkoans_test_page do |driver|
       the_elements = driver.find_elements(css: LINK_SELECTOR)
     end
-    assert_equal __, the_elements.size
+    assert_equal 1, the_elements.size
   end
 end
