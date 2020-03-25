@@ -14,8 +14,8 @@ class AboutWaiting < Edgecase::Koan
   def test_webdriver_does_not_wait_fory_dynamic_page_changes_by_default
     on_browserkoans_test_page do |driver|
       volatile_text = -> { driver['delayed-text'].text }
-      assert_equal __, volatile_text.call[/Loading/].nil?
-      assert_equal __, volatile_text.call[/jQuery/].nil?
+      assert_equal false, volatile_text.call[/Loading/].nil?
+      assert_equal true, volatile_text.call[/jQuery/].nil?
     end
   end
 
@@ -24,6 +24,7 @@ class AboutWaiting < Edgecase::Koan
     wait.until { yield }
   end
 
+  # Need step by step walkthrough on what each piece is doing, I get what it's doing, just not how.
   def test_wait_for_the_text_to_change
     saw_change = false
     on_browserkoans_test_page do |driver|
@@ -34,18 +35,18 @@ class AboutWaiting < Edgecase::Koan
       rescue Selenium::WebDriver::Error::TimeoutError => ex
       end
     end
-    assert_equal __, saw_change
+    assert_equal true, saw_change
   end
 
   def test_wait_but_not_for_long_enough
     saw_change = false
     on_browserkoans_test_page do |driver|
       volatile_text = -> { driver['delayed-text'].text }
-      assert_raise(__) do
+      assert_raise(Selenium::WebDriver::Error::TimeoutError) do
         wait_for(1) { !volatile_text.call[/Loading/] }
         saw_change = true
       end
     end
-    assert_equal __, saw_change
+    assert_equal false, saw_change
   end
 end
