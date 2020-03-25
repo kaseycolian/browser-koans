@@ -12,7 +12,7 @@ class AboutInteractingWithPages < Edgecase::Koan
       text_field = driver.find_element id: 'textentry'
       assert_equal '', text_field.attribute('value')
       text_field.send_keys 'Hello World'
-      assert_equal __, text_field.attribute('value')
+      assert_equal "Hello World", text_field.attribute('value')
     end
   end
 
@@ -40,8 +40,8 @@ class AboutInteractingWithPages < Edgecase::Koan
       checkbox.click
       submit.click
 
-      assert_equal __, checkbox_result.text
-      assert_equal __, text_result.text
+      assert_equal "Option 1 chosen", checkbox_result.text
+      assert_equal "Hello World", text_result.text
     end
   end
 
@@ -51,7 +51,8 @@ class AboutInteractingWithPages < Edgecase::Koan
       before_invocation = evidence.text
       driver.execute_script "loadItDynamically();"
       after_invocation = evidence.text
-      assert_equal __, before_invocation != after_invocation 
+      assert_equal "You loaded it.", after_invocation
+      assert_equal true, before_invocation != after_invocation 
     end
   end
 end

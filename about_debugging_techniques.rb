@@ -16,7 +16,7 @@ class AboutDebuggingTechniques < Edgecase::Koan
     
     on_browserkoans_test_page do |driver|
       driver.save_screenshot(SCREENSHOT_FILE)
-      assert_equal __, File.exist?(SCREENSHOT_FILE)
+      assert_equal true, File.exist?(SCREENSHOT_FILE)
     end
   end
 

@@ -290,6 +290,7 @@ module Edgecase
         show_progress
       else
         end_screen
+        show_progress
       end
     end
 
